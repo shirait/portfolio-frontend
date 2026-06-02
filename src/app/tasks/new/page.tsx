@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { redirect } from "next/navigation"
 
-import { requireAccessToken } from "../../lib/auth"
+import { redirectToLogin, requireAccessToken } from "../../lib/auth"
 import { requireTaskCreatePermission } from "../../lib/currentUser"
 import { getUserOptions } from "../../lib/users"
 import NewTaskForm, { type CreateTaskState } from "./NewTaskForm"
@@ -28,7 +28,7 @@ async function createTask(_prevState: CreateTaskState, formData: FormData): Prom
   })
 
   if(res.status === 401) {
-    redirect("/login")
+    redirectToLogin()
   }
 
   if(res.status === 403) {

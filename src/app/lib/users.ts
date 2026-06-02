@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation"
+import { redirectToLogin } from "./auth"
 
 export type UserOption = {
   id: number
@@ -14,7 +14,7 @@ export async function getUserOptions(token: string): Promise<UserOption[]> {
   })
 
   if(res.status === 401) {
-    redirect("/login")
+    redirectToLogin()
   }
 
   if(!res.ok) {
