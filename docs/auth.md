@@ -8,6 +8,32 @@
 4. 以降、Server Component が Cookie からトークンを読み、Rails API をサーバー側で呼び出す
 5. ログアウト時は `DELETE /api/auth/logout` 経由で Rails の sign_out を呼び、Cookie を削除
 
+#### 全体の流れ（シーケンス図）
+
+JWT はブラウザの JavaScript から読めない httpOnly Cookie に保存し、業務 API の呼び出しは Server Component がサーバー側で行う構成です。
+
+```mermaid
+sequenceDiagram
+  participant Browser as ブラウザ
+  participant Client as Client Component<br/>(LoginForm 等)
+  participant Route as Route Handler<br/>(/api/auth/*)
+  participant SC as Server Component<br/>(tasks/page 等)
+  participant Rails as Rails API
+
+  Note over Browser,Rails: ログイン
+  Client->>Route: POST /api/auth/login (email, password)
+  Route->>Rails: POST /auth/sign_in
+  Rails-->>Route: Authorization: Bearer <JWT>
+  Route->>Browser: Set-Cookie: access_token (httpOnly)
+
+  Note over Browser,Rails: ページ表示
+  Browser->>SC: GET /tasks (Cookie 自動送信)
+  SC->>SC: cookies() から JWT 取得
+  SC->>Rails: GET /api/v1/tasks (Bearer JWT)
+  Rails-->>SC: タスクデータ
+  SC-->>Browser: レンダリング済み HTML
+```
+
 ### 認可（フロントエンド側）
 
 - `GET /api/v1/profile` で権限を取得
