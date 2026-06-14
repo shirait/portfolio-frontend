@@ -5,7 +5,8 @@ export async function GET(request: NextRequest) {
   const cookieStore = await cookies()
   cookieStore.delete("access_token")
 
-  const redirectTo = request.nextUrl.searchParams.get("redirect") ?? "/login"
+  const rawRedirect = request.nextUrl.searchParams.get("redirect")
+  const redirectTo = rawRedirect?.startsWith("/") ? rawRedirect : "/login"
 
   return NextResponse.redirect(new URL(redirectTo, request.url))
 }

@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation"
 
-import { redirectToLogin } from "./auth"
+import { clearSessionAndRedirect } from "./auth"
 
 export type CurrentUser = {
   id: number
@@ -25,7 +25,7 @@ export async function getCurrentUser(token: string): Promise<CurrentUser> {
   })
 
   if(res.status === 401) {
-    redirectToLogin()
+    clearSessionAndRedirect()
   }
 
   if(!res.ok) {

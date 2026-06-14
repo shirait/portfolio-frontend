@@ -8,7 +8,7 @@ export async function getAccessToken(): Promise<string | undefined> {
   return cookieStore.get("access_token")?.value
 }
 
-export function redirectToLogin() {
+export function clearSessionAndRedirect() {
   redirect(CLEAR_SESSION_PATH)
 }
 
@@ -23,14 +23,18 @@ export async function requireAccessToken() {
 }
 
 async function isAccessTokenValid(token: string): Promise<boolean> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/profile`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    cache: "no-store",
-  })
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    })
 
-  return res.ok
+    return res.ok
+  } catch {
+    return false
+  }
 }
 
 export async function redirectIfAuthenticated(redirectTo = "/") {

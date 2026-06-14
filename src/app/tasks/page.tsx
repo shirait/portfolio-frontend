@@ -2,7 +2,7 @@ import Link from "next/link"
 import { redirect } from "next/navigation"
 
 import LogoutButton from "../components/LogoutButton"
-import { redirectToLogin, requireAccessToken } from "../lib/auth"
+import { clearSessionAndRedirect, requireAccessToken } from "../lib/auth"
 import { requireTaskReadPermission } from "../lib/currentUser"
 import { getUserOptions } from "../lib/users"
 import { taskStatusLabels, type TaskStatus } from "./taskStatus"
@@ -137,7 +137,7 @@ async function getTasks(searchParams: TaskSearchParams, token: string): Promise<
   })
 
   if(res.status === 401) {
-    redirectToLogin()
+    clearSessionAndRedirect()
   }
 
   if(res.status === 403) {

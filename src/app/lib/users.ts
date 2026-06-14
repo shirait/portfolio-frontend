@@ -1,4 +1,4 @@
-import { redirectToLogin } from "./auth"
+import { clearSessionAndRedirect } from "./auth"
 
 export type UserOption = {
   id: number
@@ -14,7 +14,7 @@ export async function getUserOptions(token: string): Promise<UserOption[]> {
   })
 
   if(res.status === 401) {
-    redirectToLogin()
+    clearSessionAndRedirect()
   }
 
   if(!res.ok) {
