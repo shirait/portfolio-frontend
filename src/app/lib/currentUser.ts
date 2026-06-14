@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation"
 
+import { clearSessionAndRedirect } from "./auth"
+
 export type CurrentUser = {
   id: number
   name: string
@@ -23,7 +25,7 @@ export async function getCurrentUser(token: string): Promise<CurrentUser> {
   })
 
   if(res.status === 401) {
-    redirect("/login")
+    clearSessionAndRedirect()
   }
 
   if(!res.ok) {
