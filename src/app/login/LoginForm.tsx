@@ -79,7 +79,7 @@ export default function LoginForm() {
           <button
             className="cursor-pointer rounded-lg border border-blue-700 bg-blue-600 px-4 py-[11px] text-base font-bold text-white enabled:hover:bg-blue-700 disabled:cursor-not-allowed disabled:border-zinc-300 disabled:bg-zinc-200 disabled:text-zinc-500"
             type="submit"
-            disabled={isSubmitting || email === "" || password === ""}
+            disabled={isSubmitting}
           >
             {isSubmitting ? "ログイン中..." : "ログイン"}
           </button>
