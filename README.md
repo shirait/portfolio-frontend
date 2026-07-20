@@ -1,8 +1,8 @@
 # タスク管理アプリ（フロントエンド）
 
-Next.js フロントエンドです。[バックエンド（Rails API）](https://github.com/init-tshirai/portfolio-backend) と組み合わせて利用します。
+Next.js フロントエンドです。[バックエンド（Rails API）](https://github.com/shirait/portfolio-backend) と組み合わせて利用します。
 
-**システム全体の説明（デモ URL・使用技術・認証・API 設計など）は [portfolio-backend/docs/system.md](https://github.com/init-tshirai/portfolio-backend/blob/master/docs/system.md) を参照してください。**
+**システム全体の説明（デモ URL・使用技術・認証・API 設計など）は [portfolio-backend/docs/system.md](https://github.com/shirait/portfolio-backend/blob/master/docs/system.md) を参照してください。**
 
 ---
 
@@ -20,7 +20,7 @@ Next.js フロントエンドです。[バックエンド（Rails API）](https:
 ### 前提
 
 - Node.js のインストール
-- [portfolio-backend](https://github.com/init-tshirai/portfolio-backend) のセットアップおよび起動（`http://localhost:3001`）
+- [portfolio-backend](https://github.com/shirait/portfolio-backend) のセットアップおよび起動（`http://localhost:3001`）
 
 ### 手順
 
